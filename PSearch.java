@@ -82,10 +82,10 @@ public class PSearch implements Callable {
 		for (int i = 0; i < numOfThreads; i += 1) {
 			begin = end;
 			end = begin + interval;
-			if (end > A.length) {
-				end = A.length;
-			} else if (end < A.length && ((end + interval) > A.length)) {
-				end = A.length;
+			if (end >= A.length) {
+				end = A.length - 1;
+			} else if (end < A.length && (A.length - end < 4)) {
+				end = A.length - 1;
 			}
 			F[i] = threadPool.submit(new PSearch(x, A, begin, end));
 			end += 1;
@@ -118,40 +118,4 @@ public class PSearch implements Callable {
 		}
 		return -1;
 	}
-
-	/*
-	 * Test array generator
-	 */
-	public static int[] getArray() {
-		int size = 100;
-		int[] array = new int[size];
-		int item = 0;
-		for (int i = 0; i < size; i++) {
-			item = (int) (Math.random() * 100);
-			array[i] = item;
-		}
-		return array;
-	}
-
-	/*
-	 * 
-	 */
-	public static void main(String args[]) {
-		int A[] = { 41, 90, 26, 56, 26, 260, 15, 2, 65, 29, 84, 93, 45, 19, 41,
-				13, 91, 93, 15, 3, 73, 2, 64, 72, 22, 44, 80, 9, 48, 44, 53,
-				38, 46, 89, 36, 33, 13, 91, 80, 39, 92, 72, 19, 28, 89, 2, 63,
-				14, 50, 16, 45, 80, 52, 41, 47, 40, 1, 78, 57, 30, 13, 73, 71,
-				35, 90, 93, 75, 36, 76, 23, 37, 62, 66, 84, 64, 17, 77, 12, 56,
-				0, 92, 54, 41, 44, 52, 87, 52, 55, 66, 82, 71, 63, 65, 81, 44,
-				7, 44, 99, 26, 82, 6, 1500 };
-		int x = 1500;
-		PSearch s = new PSearch();
-		for (int i : A) {
-			System.out.print(i + ", ");
-		}
-		System.out.println();
-		System.out.println("The index of " + x + " is "
-				+ s.parallelSearch(x, A, 50));
-	}
-
 }
