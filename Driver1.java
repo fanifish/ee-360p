@@ -586,8 +586,8 @@ public class Driver1 {
 				60, 12, 61, 77, 7, 81, 72, 71, 36, 29, 13, 85, 33, 16, 86, 23,
 				72, 5, 4, 80, 6, 73, 38, 34, 79, 57, 23, 87, 21, 15, 74, 98,
 				18, 52, 7, 22, 0, 52, 7, 7, 42, 25, 47, 52, 47, 44, 92, 99, 17,
-				28, 34, 62, 24, };
-		int x = 7;
+				28, 34, 62, 24};
+		int x = 7;   // specifies a number to be found in the array
 		System.out.println("The size of the array is " + A.length);
 		PSearch s = new PSearch();
 		for (int i : A) {
@@ -595,6 +595,6 @@ public class Driver1 {
 		}
 		System.out.println();
 		System.out.println("The index of " + x + " is "
-				+ s.parallelSearch(x, A, 900));
+				+ s.parallelSearch(x, A, 900));  // calls the parallel search algorithm
 	}
 }
